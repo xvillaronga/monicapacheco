@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Acuarelas de Mónica</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap');
+        
+        :root {
+            --color-lavender: #e6e6fa;
+            --color-pale-pink: #f8d7da;
+            --color-soft-blue: #d9e4f5;
+            --color-mint: #d4edda;
+            --color-cream: #fff9e6;
+            --color-text: #333;
+            --color-accent: #9f86c0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-cream);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--color-text);
+            text-decoration: none;
+        }
+        
+        .menu-toggle {
+            display: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-left: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--color-accent);
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .dropdown {
+            position: relative;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+            z-index: 1;
+            border-radius: 5px;
+            padding: 0.5rem 0;
+            margin-top: 10px;
+        }
+        
+        .dropdown-content a {
+            color: var(--color-text);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: var(--color-soft-blue);
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        /* Header */
+        header {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 60vh;
+            background-color: var(--color-soft-blue);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 60px;
+        }
+        
+        .header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+            max-width: 80%;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-text);
+            font-weight: 500;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        
+        .intro {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--color-accent);
+            margin: 1rem auto;
+        }
+        
+        /* Filter */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: 1px solid var(--color-accent);
+            color: var(--color-text);
+            padding: 0.5rem 1.5rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--color-accent);
+            color: white;
+        }
+        
+        /* Gallery */
+        .gallery {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-auto-rows: 300px;
+            gap: 20px;
+            padding: 2rem 0;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .gallery-item:nth-child(3n+1) {
+            grid-row: span 2;
+        }
+        
+        .gallery-item:nth-child(4n+2) {
+            grid-column: span 2;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-item:hover .item-info {
+            opacity: 1;
+        }
+        
+        .item-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .item-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-description {
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+        
+        /* About Section */
+        .about-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 350px;
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .about-content {
+            flex: 2;
+        }
+        
+        .about-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--color-text);
+        }
+        
+        .about-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: var(--color-soft-blue);
+            border-radius: 10px;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-details {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-details p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--color-accent);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-accent);
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .contact-form {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background-color: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #8a6db0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-soft-blue);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-nav li {
+            margin: 0 1rem;
+        }
+        
+        .footer-nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--color-accent);
+        }
+        
+        .watercolor-accent {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .accent-1 {
+            top: 10%;
+            left: 5%;
+            width: 300px;
+            height: 300px;
+            background-color: var(--color-lavender);
+            border-radius: 50% 60% 70% 40%;
+        }
+        
+        .accent-2 {
+            bottom: 30%;
+            right: 10%;
+            width: 250px;
+            height: 250px;
+            background-color: var(--color-pale-pink);
+            border-radius: 60% 40% 30% 70%;
+        }
+        
+        .accent-3 {
+            bottom: 20%;
+            left: 20%;
+            width: 200px;
+            height: 200px;
+            background-color: var(--color-mint);
+            border-radius: 40% 60% 50% 70%;
+        }
+        
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .about-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .about-img {
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                padding: 2rem 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 1.5rem 0;
+            }
+            
+            .dropdown-content {
+                position: static;
+                display: none;
+                box-shadow: none;
+                min-width: auto;
+                margin-top: 0.5rem;
+            }
+            
+            .dropdown.open .dropdown-content {
+                display: block;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-auto-rows: 250px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header-content {
+                max-width: 90%;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-item:nth-child(4n+2) {
+                grid-column: span 1;
+            }
+            
+            .navbar-container {
+                padding: 1rem;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .filter-btn {
+                padding: 0.4rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+		
+		
+		
+		
+		
+		 /* Conservo solo los estilos relevantes para el formulario */
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500&display=swap');
+        
+        :root {
+            --color-accent: #9f86c0;
+            --color-soft-blue: #d9e4f5;
+            --color-text: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+        
+        .contact-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: var(--color-soft-blue);
+            border-radius: 10px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+        }
+        
+        .contact-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background-color: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #8a6db0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .form-loading {
+            display: none;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 2rem;
+            height: 2rem;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            border-top-color: var(--color-accent);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="watercolor-accent accent-1"></div>
+    <div class="watercolor-accent accent-2"></div>
+    <div class="watercolor-accent accent-3"></div>
+    
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo">Mónica Pacheco</a>
+            <div class="menu-toggle">☰</div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li class="nav-item dropdown">
+                    <a href="#galeria" class="nav-link">Galería</a>
+                    <div class="dropdown-content">
+                        <a href="#botanica">Botánica</a>
+                        <a href="#coches">Coches</a>
+                        <a href="#viaje">Cuaderno de Viaje</a>
+                        <a href="#paisajes">Paisajes</a>
+                    </div>
+                </li>
+                <li class="nav-item"><a href="#sobre-mi" class="nav-link">Sobre Mí</a></li>
+                <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <header id="inicio">
+        <!-- Aquí puedes reemplazar con tu imagen de header -->
+        <img class="header-image" src="0.jpg" alt="Header de Mónica">
+        <div class="header-content">
+            <h1>Mónica Pacheco</h1>
+            <p class="subtitle">Expresiones en Acuarela</p>
+        </div>
+    </header>
+    
+    <section class="intro">
+        <p>Bienvenidos a la galería digital de Mónica Pacheco, donde el color y la fluidez de la acuarela cobran vida en cada pincelada. Explore esta colección de obras que reflejan la delicadeza y expresividad de esta técnica tradicional interpretada con una visión contemporánea.</p>
+    </section>
+    
+    <section id="galeria">
+        <h2 class="section-title">Galería</h2>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="botanica" id="botanica">Botánica</button>
+            <button class="filter-btn" data-filter="coches" id="coches">Coches</button>
+            <button class="filter-btn" data-filter="viaje" id="viaje">Cuaderno de Viaje</button>
+            <button class="filter-btn" data-filter="paisajes" id="paisajes">Paisajes</button>
+        </div>
+        
+        <div class="gallery">
+            <!-- Botánica -->
+            <div class="gallery-item" data-category="botanica">
+                <img src="1.png" alt="Acuarela Botánica 1">
+                <div class="item-info">
+                    <h3 class="item-title">Flores de Primavera</h3>
+                    <p class="item-description">Acuarela sobre papel, 25x35cm, 2023</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="botanica">
+                <img src="2.png" alt="Acuarela Botánica 2">
+                <div class="item-info">
+                    <h3 class="item-title">Jardín Botánico</h3>
+                    <p class="item-description">Acuarela sobre papel, 30x40cm, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Coches -->
+            <div class="gallery-item" data-category="coches">
+                <img src="3.png" alt="Acuarela Coches 1">
+                <div class="item-info">
+                    <h3 class="item-title">Atardecer en Venecia</h3>
+                    <p class="item-description">Acuarela sobre papel, 40x50cm, 2023</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="coches">
+                <img src="4.jpg" alt="Acuarela Coches 2">
+                <div class="item-info">
+                    <h3 class="item-title">Vintage Europeo</h3>
+                    <p class="item-description">Acuarela sobre papel, 35x45cm, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Cuaderno de Viaje -->
+            <div class="gallery-item" data-category="viaje">
+                <img src="5.png" alt="Acuarela Viaje 1">
+                <div class="item-info">
+                    <h3 class="item-title">Flores Silvestres</h3>
+                    <p class="item-description">Acuarela sobre papel, 30x30cm, 2023</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="viaje">
+                <img src="6.png" alt="Acuarela Viaje 2">
+                <div class="item-info">
+                    <h3 class="item-title">Vida Marina</h3>
+                    <p class="item-description">Acuarela sobre papel, 25x35cm, 2022</p>
+                </div>
+            </div>
+            
+            <!-- Paisajes -->
+            <div class="gallery-item" data-category="paisajes">
+                <img src="7.png" alt="Acuarela Paisaje 1">
+                <div class="item-info">
+                    <h3 class="item-title">Amanecer en la Montaña</h3>
+                    <p class="item-description">Acuarela sobre papel, 30x40cm, 2023</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" data-category="paisajes">
+                <img src="8.png" alt="Acuarela Paisaje 2">
+                <div class="item-info">
+                    <h3 class="item-title">Mar en Calma</h3>
+                    <p class="item-description">Acuarela sobre papel, 40x40cm, 2022</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="sobre-mi" class="about-section">
+        <div class="about-img">
+            <!-- Reemplazar con foto real de la artista -->
+            <img src="monica.png" alt="Mónica, la artista">
+        </div>
+        <div class="about-content">
+            <h2>Sobre Mí</h2>
+            <p>Mónica es una acuarelista apasionada que ha dedicado más de una década a perfeccionar su técnica. Inspirada por la naturaleza y los pequeños detalles de la vida cotidiana, sus obras reflejan tanto la delicadeza como la fuerza expresiva que puede alcanzar la acuarela.</p>
+            <p>Autodidacta, Mónica ha participado en numerosas exposiciones nacionales e internacionales. Su trabajo se caracteriza por el uso de colores vibrantes y transparencias que crean atmósferas únicas en cada una de sus creaciones.</p>
+            <p>Además de su labor artística, Mónica imparte talleres de acuarela donde comparte su pasión y conocimientos con otros entusiastas de esta técnica.</p>
+        </div>
+    </section>
+    
+    <section id="contacto" class="contact-section">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <div class="contact-details">
+                    <p><i>✉</i> marta-2602@hotmail.com</p>
+                    <p><i>☎</i> +34 637 572 404</p>
+                    <p><i>📍</i> Málaga, España</p>
+                </div>
+                <h3>Redes Sociales</h3>
+                <div class="social-links">
+						<a href="https://www.instagram.com/monipiolin_azulpastel" title="Instagram"><i class="fab fa-instagram social-link"></i></a>
+						<a href="https://wa.me/+34637572404"><i class="fab fa-whatsapp social-link"></i></a>
+						<a href="mailto:marta-2602@hotmail.com"><i class="fas fa-envelope social-link"></i></a>
+                </div>
+            </div>
+			
+			<div class="alert alert-success" id="success-message">
+				¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.
+			</div>
+			
+			<div class="alert alert-error" id="error-message">
+				Hubo un problema al enviar el mensaje. Por favor, inténtalo de nuevo.
+			</div>
+			
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Asunto</label>
+                        <input type="text" id="subject" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+    </section>
+	
+	
+	
+	
+	     
+    <footer>
+        <ul class="footer-nav">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#sobre-mi">Sobre Mí</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+        <p>&copy; 2025 Mónica Pacheco - Todos los derechos reservados</p>
+    </footer>
+    
+    <a href="#" class="back-to-top">▲</a>
+    
+    <script>
+        // Menu toggle for mobile
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Dropdown on mobile
+        const dropdowns = document.querySelectorAll('.dropdown');
+        
+        dropdowns.forEach(dropdown => {
+            if (window.innerWidth <= 768) {
+                dropdown.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    dropdown.classList.toggle('open');
+                });
+            }
+        });
+        
+        // Filter gallery
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Get filter value
+                const filterValue = btn.getAttribute('data-filter');
+                
+                // Filter gallery items
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+       // Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+		
+		
+		
+		
+		
+		 <!-- Script de EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <script>
+        // Inicializar EmailJS con tu clave pública
+        // NOTA: Necesitarás reemplazar "tu_clave_publica" con tu clave real de EmailJS
+        (function() {
+            emailjs.init("tu_clave_publica");
+        })();
+        
+        // Elementos del DOM
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const loadingSpinner = document.getElementById('loading');
+        const submitButton = document.getElementById('submit-btn');
+        
+        // Manejar el envío del formulario
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Mostrar spinner de carga y desactivar botón
+            loadingSpinner.style.display = 'block';
+            submitButton.disabled = true;
+            
+            // Ocultar mensajes previos
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Obtener los datos del formulario
+            const formData = {
+                name: contactForm.name.value,
+                email: contactForm.email.value,
+                subject: contactForm.subject.value || "Mensaje desde la web",
+                message: contactForm.message.value
+            };
+            
+            // Enviar el email usando EmailJS
+            // NOTA: Necesitarás reemplazar "tu_service_id" y "tu_template_id" con tus IDs reales
+            emailjs.send('tu_service_id', 'tu_template_id', {
+                name: formData.name,
+                email: formData.email,
+                subject: formData.subject,
+                message: formData.message
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                
+                // Mostrar mensaje de éxito
+                successMessage.style.display = 'block';
+                
+                // Reiniciar el formulario
+                contactForm.reset();
+            })
+            .catch(function(error) {
+                console.log('FAILED...', error);
+                
+                // Mostrar mensaje de error
+                errorMessage.style.display = 'block';
+            })
+            .finally(function() {
+                // Ocultar spinner y reactivar botón
+                loadingSpinner.style.display = 'none';
+                submitButton.disabled = false;
+            });
+        });
